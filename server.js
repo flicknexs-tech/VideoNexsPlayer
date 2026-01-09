@@ -1,9 +1,11 @@
+require('dotenv').config();
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 
 const app = express();
-const PORT = 3001;
+const PORT = process.env.PORT || 3001;
+const DOMAIN = process.env.DOMAIN || 'localhost';
 
 app.use(cors());
 app.use(bodyParser.json());
@@ -72,6 +74,7 @@ app.get('/dashboard', (req, res) => {
 });
 
 app.listen(PORT, () => {
-  console.log(`Telemetry server running at http://localhost:${PORT}`);
-  console.log(`Dashboard available at http://localhost:${PORT}/dashboard`);
+  console.log(`Telemetry server running at http://${DOMAIN}:${PORT}`);
+  console.log(`Dashboard available at http://${DOMAIN}:${PORT}/dashboard`);
+  console.log(`Ping endpoint: http://${DOMAIN}:${PORT}/ping`);
 });
